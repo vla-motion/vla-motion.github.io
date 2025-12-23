@@ -1,12 +1,563 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>vla-motion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>
+      Robotic VLA Benefits from Joint Learning with Motion Image Diffusion
+    </title>
+    <meta content="" name="description" />
+
+    <!-- Usual metadata. -->
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1"
+    />
+
+    <!-- Open Graph / Facebook. -->
+    <meta property="og:title" content="vla-motion" />
+    <meta property="og:description" content="" />
+    <meta property="og:type" content="website" />
+
+    <!-- Twitter. -->
+    <meta property="twitter:title" content="vla-motion" />
+    <meta property="twitter:description" content="" />
+
+    <!-- Webfont. -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&amp;display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.4/dist/css/bulma-carousel.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.0/dist/css/bulma-slider.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/modern-normalize@3.0.1/modern-normalize.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/3.19.0/tabler-icons-outline.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" type="text/css" />
+
+    <!-- KaTeX -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+      integrity="sha384-nB0miv6/jRmo5UMMR1wu3Gz6NLsoTkbqJghGIsx//Rlm+ZU03BU6SQNC66uf4l5+"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+      integrity="sha384-7zkQWkzuo3B5mTepMUcHkMB5jZaolc2xDwL6VFqjFALcbeS9Ggm/Yr2r3Dy4lfFg"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+      integrity="sha384-43gviWU0YVjaDtb/GhzOouOXtZMP/7XUzwPTstBeZFe/+rCMvRwr4yROQP43s0Xk"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false,
+        });
+      });
+    </script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4JEVJSTQ6B"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        window.dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-4JEVJSTQ6B");
+    </script>
   </head>
   <body>
-    <h1>Hello World 👋</h1>
-    <p>This is vla-motion.github.io</p>
+    <!-- Title. We tweak the wrapping behaviors a bit. -->
+    <div style="height: 1em"></div>
+    <h1 style="padding: 0 1em">
+      <!-- &#8209; is a non-breaking hyphen. -->
+      Robotic VLA Benefits from Joint Learning <br />
+      with Motion Image Diffusion
+    </h1>
+
+    <!-- Authors. -->
+    <div id="author-list">
+      <a
+        href="https://yuffish.github.io/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Yu Fang<sup>1,2,*</sup>
+      </a>
+      <a
+        href="https://kahnchana.github.io/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Kanchana Ranasinghe<sup>1</sup></a
+      >
+      <a
+        href="https://www.linkedin.com/in/le-tycho-xue-5abbb9157/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Le Xue<sup>1</sup></a
+      >
+      <a
+        href="https://sites.google.com/view/hongluzhou/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Honglu Zhou<sup>1</sup></a
+      >
+      <a
+        href="https://www.juntaotan.com/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Juntao Tan<sup>1</sup></a
+      >
+      <span class="author-break" aria-hidden="true"></span>
+      <a
+        href="https://xurantju.github.io/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Ran Xu<sup>1</sup></a
+      >
+      <a
+        href="https://shelbyh.ai/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Shelby Heinecke<sup>1</sup></a
+      >
+      <a
+        href="http://cmxiong.com/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Caiming Xiong<sup>1</sup></a
+      >
+      <a
+        href="https://www.salesforce.com/blog/author/silvio-savarese/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Silvio Savarese<sup>1</sup></a
+      >
+      <span class="author-break" aria-hidden="true"></span>
+      <a
+        href="http://danszafir.com/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Daniel Szafir<sup>2</sup></a
+      >
+      <a
+        href="https://dingmyu.github.io/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Mingyu Ding<sup>2</sup></a
+      >
+      <a
+        href="http://michaelryoo.com/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Michael S. Ryoo<sup>1</sup></a
+      >
+      <a
+        href="https://www.niebles.net/"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        Juan Carlos Niebles<sup>1</sup></a
+      >
+    </div>
+    <div style="height: 0.75em"></div>
+
+    <!-- Affiliations -->
+    <div id="affiliations">
+      <div><sup>1</sup> Salesforce AI Research</div>
+      <div><sup>2</sup> University of North Carolina at Chapel Hill</div>
+      <div class="affiliations-note">
+        <sup>*</sup> Work done during an internship at Salesforce
+      </div>
+    </div>
+    <div style="height: 1em"></div>
+
+    <!-- Links -->
+    <div
+      style="
+        display: flex;
+        justify-content: center;
+        gap: 0.75em;
+        flex-wrap: wrap;
+      "
+    >
+      <a
+        href="https://arxiv.org/abs/2512.18007"
+        target="_blank"
+        rel="external nofollow noopener"
+      >
+        <button>
+          <i class="ai ai-arxiv"></i>
+          arXiv
+        </button>
+      </a>
+      <a href="" target="_blank">
+        <button>
+          <i class="ti ti-brand-github"></i>
+          Code (Coming Soon)
+        </button>
+      </a>
+      <a href="" target="_blank">
+        <button>
+          <i class="fa-brands fa-x-twitter"></i>
+          Post
+        </button>
+      </a>
+    </div>
+    <div style="height: 0.5em"></div>
+
+    <section class="section">
+      <div class="container is-max-widescreen">
+        <p style="text-align: center; max-width: 50em; margin: 1em auto">
+          <strong>TLDR;</strong>
+          We proposed a joint learning strategy with
+          <strong>motion image diffusion</strong> that enhances VLA models with
+          <strong>motion reasoning</strong> capabilities, by extending VLA into
+          a dual-head architecture with a DiT-based motion head for
+          <strong>optical flow prediction</strong> alongside the standard action
+          head.
+        </p>
+        <video
+          src="assets/videos/video_vla-motion.mp4"
+          width="100%"
+          controls
+          style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+        ></video>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2>Motivation</h2>
+        <img
+          src="assets/images/teaser.jpg"
+          style="
+            max-width: 50%;
+            margin: 1em 0;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+          "
+        />
+        <p>
+          Vision-Language-Action (VLA) models have achieved remarkable progress
+          in robotic manipulation by mapping multimodal observations and
+          instructions directly to actions. However, they typically
+          <strong
+            >mimic expert trajectories without predictive motion
+            reasoning</strong
+          >, which limits their ability to reason about what actions to take.
+        </p>
+        <p>
+          To address this limitation, we propose
+          <strong>joint learning with motion image diffusion</strong>, a novel
+          strategy that
+          <strong>enhances VLA models with motion reasoning capabilities</strong
+          >. Our method extends the VLA architecture with
+          <strong>a dual-head design</strong>: while the action head predicts
+          action chunks as in vanilla VLAs, an additional motion head,
+          implemented as a Diffusion Transformer (DiT), predicts
+          <strong>optical-flow-based future motion images</strong> that capture
+          future dynamics. The two heads are trained jointly, enabling the
+          shared VLM backbone to learn representations that couple robot control
+          with motion knowledge. This joint learning builds temporally coherent
+          and physically grounded representations without modifying the
+          inference pathway of standard VLAs, thereby maintaining test-time
+          latency.
+        </p>
+        <p>
+          Experiments in both simulation and real-world environments demonstrate
+          that joint learning with motion image diffusion improves the success
+          rate of pi-series VLAs to 97.5% on the LIBERO benchmark and 58.0% on
+          the RoboTwin benchmark, yielding a 23% improvement in real-world
+          performance and validating its effectiveness in enhancing the motion
+          reasoning capability of large-scale VLAs.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2>Method</h2>
+        <img
+          src="assets/images/method.jpg"
+          style="max-width: 100%; margin: 1em 0"
+        />
+        <p>
+          We propose
+          <strong>joint learning with motion image diffusion</strong>, a simple
+          yet effective strategy that seamlessly improves VLAs with motion
+          reasoning ability. Specifically, we extend VLA architecture with
+          <strong>a dual-head design</strong>: an action head that predicts
+          action chunks as in vanilla VLAs, and a motion head implemented as a
+          Diffusion Transformer (DiT) that predicts
+          <strong>optical-flow-based future motion images</strong> through
+          diffusion. Both heads share the same VLM backbone and are optimized
+          jointly, enabling the model to learn temporally coherent and
+          physically grounded representations that
+          <strong
+            >support both fine-grained control and motion understanding</strong
+          >. We find that optical-flow-based motion images offer an efficient
+          and control-aligned supervision signal in joint learning. Unlike
+          future image prediction or language-based motion descriptions, optical
+          flow directly encodes how the scene moves, making it inherently
+          consistent with action learning. This complementary supervision
+          encourages the model to align physical motion dynamics with robot
+          control, providing dense temporal guidance that improves visuomotor
+          policy learning. Importantly, our strategy
+          <strong
+            >integrates seamlessly into existing large-scale VLA models</strong
+          >
+          with no additional inference latency, making it practical for
+          real-world robotic deployment.
+        </p>
+      </div>
+    </section>
+
+    <section class="section results-section">
+      <div class="container is-max-widescreen">
+        <h2>Results</h2>
+        <div class="content has-text-centered">
+          <div class="columns">
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/pick_up_the_black_bowl_from_table_center_and_place_it_on_the_plate.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Pick up the black bowl from table center and place it on the
+                plate
+              </p>
+            </div>
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/pick_up_the_alphabet_soup_and_place_it_in_the_basket.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Pick up the alphabet soup and place it in the basket
+              </p>
+            </div>
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/open_the_middle_drawer_of_the_cabinet.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">Open the middle drawer of the cabinet</p>
+            </div>
+          </div>
+        </div>
+        <div class="content has-text-centered">
+          <div class="columns">
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/put_the_white_mug_on_the_left_plate_and_put_the_yellow_and_white_mug_on_the_right_plate.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Put the white mug on the left plate and put the yellow and white
+                mug on the right plate
+              </p>
+            </div>
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/turn_on_the_stove_and_put_the_moka_pot_on_it.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Turn on the stove and put the moka pot on it
+              </p>
+            </div>
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/put_the_black_bowl_in_the_bottom_drawer_of_the_cabinet_and_close_it.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Put the black bowl in the bottom drawer of the cabinet and close
+                it
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="content has-text-centered">
+          <div class="columns">
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/grab_the_hammer_and_beat_the_block.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">Grab the hammer and beat the block</p>
+            </div>
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/grab_the_shoe_from_the_table_and_place_it_on_the_mat.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Grab the shoe from the table and place it on the mat
+              </p>
+            </div>
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/pick_up_the_can_and_move_it_to_beside_the_pot.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Pick up the can and move it to beside the pot
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="content has-text-centered">
+          <div class="columns">
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/pick_the_scanner_and_pick_the_object_and_use_the_scanner_to_scan_the_object.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Pick the scanner and pick the object and use the scanner to scan
+                the object
+              </p>
+            </div>
+            <div class="column has-text-centered">
+              <video
+                src="assets/videos/move_the_blocks_to_the_center_of_the_table_and_stack_the_green_block_on_the_red_block.mp4"
+                width="100%"
+                autoplay
+                loop
+                controls
+                muted
+                style="box-shadow: 0 0 1em rgba(0, 0, 0, 0.07)"
+              ></video>
+              <p class="video-caption">
+                Move the blocks to the center of the table and stack the green
+                block on the red block
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container is-max-desktop">
+        <h2>Citation</h2>
+        <pre>
+<code>@article{fang2025robotic,
+  title={Robotic VLA Benefits from Joint Learning with Motion Image Diffusion},
+  author={Fang, Yu and Ranasinghe, Kanchana and Xue, Le and Zhou, Honglu and Tan, Juntao and Xu, Ran and Heinecke, Shelby and Xiong, Caiming and Savarese, Silvio and Szafir, Daniel and Ding, Mingyu and Ryoo, Michael S. and Niebles, Juan Carlos},
+  journal={arXiv preprint arXiv:2512.18007},
+  year={2025}
+}</code></pre>
+      </div>
+    </section>
   </body>
 </html>
